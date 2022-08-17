@@ -2,6 +2,7 @@ import { Client } from "pg";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
+import {PostInterface} from "./PostInterface"
 
 config(); 
 
@@ -20,6 +21,7 @@ app.use(cors()) //add CORS support to each following route handler
 const client = new Client(dbConfig);
 client.connect();
 
+//get all posts
 app.get("/posts", async (req, res) => {
   try {
     const dbres = 
@@ -29,6 +31,24 @@ app.get("/posts", async (req, res) => {
     console.log(error)
   }
   });
+
+//create a post
+app.post<{}, {}, PostInterface>("/posts", async (req, res) => {
+  let {title, description, state} = req.body;
+  if (title && description) {
+  const postQuery = 'INSERT INTO posts (title, description, state) VALUES ($1, $2, $3) RETURNING *'
+  const postedQuery = await client.query(postQuery, [title, description, state])
+  res.status(200).json(
+    {
+      status: "success",
+      data: {
+        info: postedQuery.rows,
+      }
+    })
+} else {
+  res.status(500).send("Error 500: Entry title or description missing")
+}
+})
 
 //Start the server on the given port
 const port = process.env.PORT;
