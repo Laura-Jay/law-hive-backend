@@ -34,10 +34,10 @@ app.get("/posts", async (req, res) => {
 
 //create a post
 app.post<{}, {}, PostInterface>("/posts", async (req, res) => {
-  let {title, description, state} = req.body;
+  let {title, description, feeStructure, feeAmount, feePercentage, state} = req.body;
  try {
-  const postQuery = 'INSERT INTO posts (title, description, state) VALUES ($1, $2, $3) RETURNING *'
-  const postedQuery = await client.query(postQuery, [title, description, state])
+  const postQuery = 'INSERT INTO posts (title, description, feeStructure, feeAmount, feePercentage, state) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *'
+  const postedQuery = await client.query(postQuery, [title, description, feeStructure, feeAmount, feePercentage, state])
   res.status(200).json(
     {
       status: "success",

@@ -28,3 +28,8 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 Notes of Database Design: 
 
 
+# Story 2 
+
+- Alter SQL database locally and remotely using Beekeeper Studio
+- Alter post request
+- test in Postman
