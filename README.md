@@ -30,6 +30,19 @@ Notes of Database Design:
 
 # Story 2 
 
-- Alter SQL database locally and remotely using Beekeeper Studio
-- Alter post request
-- test in Postman
+- Alter SQL database locally and remotely using Beekeeper Studio: y
+- Alter post request: y
+- test in Postman: y
+
+# Story 3
+
+- Alter SQL database locally to add amountpaid (decimal(6,2)) and settlementamount (decimal(6,2): y
+- Add PUT request to api routes: y 
+- Test local:
+- Alter SQL database remote as above: 
+- Test Remote: 
+
+Bug issues: 
+
+Put request recieving error at front end. Checked query in database and it works correctly. Checked in Postman and get response CANNOT PUT. Error must be in server. 
+Resolved, server needed to be restarted locally. 
