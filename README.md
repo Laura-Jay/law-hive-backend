@@ -25,8 +25,6 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 - Test GET request for heroku on postman: y 
 - Set up GET and POST routes for story 1: y 
 
-Notes of Database Design: 
-
 
 # Story 2 
 
