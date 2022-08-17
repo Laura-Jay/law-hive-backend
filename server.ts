@@ -35,7 +35,7 @@ app.get("/posts", async (req, res) => {
 //create a post
 app.post<{}, {}, PostInterface>("/posts", async (req, res) => {
   let {title, description, state} = req.body;
-  if (title && description) {
+ try {
   const postQuery = 'INSERT INTO posts (title, description, state) VALUES ($1, $2, $3) RETURNING *'
   const postedQuery = await client.query(postQuery, [title, description, state])
   res.status(200).json(
@@ -45,8 +45,8 @@ app.post<{}, {}, PostInterface>("/posts", async (req, res) => {
         info: postedQuery.rows,
       }
     })
-} else {
-  res.status(500).send("Error 500: Entry title or description missing")
+} catch (error) {
+  res.status(400).send(error)
 }
 })
 
